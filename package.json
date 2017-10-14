@@ -1,0 +1,38 @@
+{
+  "name": "da5883",
+  "version": "1.0.0",
+  "description": "A simple nodejs module for the RPI used for reading data from the DA5883 magnetometer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "configure": "node-gyp configure",
+    "build": "node-gyp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artus9033/node-da5883.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "da5883",
+    "magnetometer",
+    "rpi",
+    "raspberry"
+  ],
+  "author": "artus9033",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/artus9033/node-da5883/issues"
+  },
+  "homepage": "https://github.com/artus9033/node-da5883#readme",
+  "devDependencies": {
+    "node-gyp": "^1.0.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "i2c": "^0.2.3",
+    "bindings": "^1.2.1",
+    "nan": "^2.0.5"
+  }
+}
