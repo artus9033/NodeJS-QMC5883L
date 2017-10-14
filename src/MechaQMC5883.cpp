@@ -60,5 +60,10 @@ void MechaQMC5883::read(uint16_t* x,uint16_t* y,uint16_t* z,float* a){
 
 float MechaQMC5883::azimuth(uint16_t *a, uint16_t *b){
   float azimuth = atan2((int)*a,(int)*b) * 180.0/PI;
-  return azimuth < 0?360 + azimuth:azimuth;
+  if(azimuth < 0){
+    azimuth += 360;
+  }else if(azimuth > 360){
+    azimuth -= 360;
+  }
+  return azimuth < 0;
 }
