@@ -27,7 +27,7 @@ void ReadCompassData(const FunctionCallbackInfo<Value>& args){
 
 void ReadAzimuth(const FunctionCallbackInfo<Value>& args){
   uint16_t x, y, z;
-  float azimuth;
+  int azimuth;
   Isolate* isolate = args.GetIsolate();
   if(ready){
     da5883.read(&x, &y, &z, &azimuth);
