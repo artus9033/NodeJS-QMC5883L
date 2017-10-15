@@ -4,6 +4,10 @@
 #include <inttypes.h>
 #include <math.h>
 #include "I2Cdev.h"
+#include <sstream>
+#include <stdlib.h>
+#include <string>
+#include <iostream>
 
 //Credits for this file go to the original author
 //taken from here: https://github.com/mechasolution/Mecha_QMC5883L
@@ -47,11 +51,11 @@ void setMode(uint16_t mode,uint16_t odr,uint16_t rng,uint16_t osr); // setting
 
 void softReset(); //soft RESET
 
-void read(uint16_t* x,uint16_t* y,uint16_t* z); //reading
-void read(uint16_t* x,uint16_t* y,uint16_t* z,int* a);
-void read(uint16_t* x,uint16_t* y,uint16_t* z,float* a);
+void read(int16_t* x,int16_t* y,int16_t* z); //reading
+void read(int16_t* x,int16_t* y,int16_t* z,int* a);
+void read(int16_t* x, int16_t* y,int16_t* z,float* a);
 
-float azimuth(uint16_t* a,uint16_t* b);
+float azimuth(int16_t* a,int16_t* b);
 
 private:
 

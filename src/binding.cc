@@ -8,7 +8,7 @@ MechaQMC5883 da5883;
 bool ready = false;  // if da5883 was already initialized
 
 void ReadCompassData(const FunctionCallbackInfo<Value>& args){
-  uint16_t x, y, z;
+  int16_t x, y, z;
   Isolate* isolate = args.GetIsolate();
   Local<Context> context = isolate->GetCurrentContext();
   Local<Object> obj = Object::New(isolate);
@@ -26,8 +26,8 @@ void ReadCompassData(const FunctionCallbackInfo<Value>& args){
 }
 
 void ReadAzimuth(const FunctionCallbackInfo<Value>& args){
-  uint16_t x, y, z;
-  int azimuth;
+  int16_t x, y, z;
+  float azimuth;
   Isolate* isolate = args.GetIsolate();
   if(ready){
     da5883.read(&x, &y, &z, &azimuth);
@@ -42,7 +42,7 @@ void ReadAzimuth(const FunctionCallbackInfo<Value>& args){
 
 void InitCompass(const FunctionCallbackInfo<Value>& args) {
   da5883.init();
-  da5883.setMode(Mode_Continuous,ODR_200Hz,RNG_2G,OSR_256);
+  da5883.setMode(Mode_Continuous,ODR_200Hz,RNG_8G,OSR_256);
   ready = true;
   args.GetReturnValue().Set(true);
 }

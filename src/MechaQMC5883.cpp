@@ -14,7 +14,7 @@ void MechaQMC5883::WriteReg(byte Reg,byte val){
 void MechaQMC5883::init(){
   WriteReg(0x0B,0x01);
   //Define Set/Reset period
-  setMode(Mode_Continuous,ODR_200Hz,RNG_2G,OSR_512);
+  setMode(Mode_Continuous,ODR_200Hz,RNG_8G,OSR_512);
   /*
   Define
   OSR = 512
@@ -33,43 +33,40 @@ void MechaQMC5883::softReset(){
   WriteReg(0x0A,0x80);
 }
 
-void MechaQMC5883::read(uint16_t* x, uint16_t* y, uint16_t* z){
-  float offsetX = 32758;
-  float offsetY = 32780.5;
-  float offsetZ = 32768;
-  float scaleX = 1.4985576042493436;
-  float scaleY = 1.5003667649800572;
-  float scaleZ = 1.5010778827630493;
-  float scale = 4.35;
+void MechaQMC5883::read(int16_t* x, int16_t* y, int16_t* z){
+  //WriteReg(0x00, 0x1);
+  //uint8_t buffer = ;
   uint8_t* buffer = new uint8_t[6];
   uint8_t reg = 0x00;
   I2Cdev::readBytes(address, reg, (uint8_t) 6, buffer);
   *x = buffer[0]; //LSB  x
   *x |= buffer[1] << 8; //MSB  x
-  *x += offsetX;
-  *x *= scaleX + scale;
   *y = buffer[2]; //LSB  z
   *y |= buffer[3] << 8; //MSB z
-  *y += offsetY;
-  *y *= scaleY + scale;
   *z = buffer[4]; //LSB y
   *z |= buffer[5] << 8; //MSB y
-  *z += offsetZ;
-  *z *= scaleZ + scale;
 }
 
-void MechaQMC5883::read(uint16_t* x,uint16_t* y,uint16_t* z,int* a){
+void MechaQMC5883::read(int16_t* x,int16_t* y,int16_t* z,int* a){
   read(x,y,z);
   *a = azimuth(y,x);
 }
 
-void MechaQMC5883::read(uint16_t* x,uint16_t* y,uint16_t* z,float* a){
+void MechaQMC5883::read(int16_t* x,int16_t* y,int16_t* z,float* a){
   read(x,y,z);
   *a = azimuth(y,x);
 }
 
 
-float MechaQMC5883::azimuth(uint16_t *a, uint16_t *b){
-  float azimuth = atan2((int)*a,(int)*b) * 180.0/PI;
+float MechaQMC5883::azimuth(int16_t *a, int16_t *b){
+  float azimuth = atan2(*a, *b) * 180.0/PI;
+  //std::cout << "az: " << azimuth << std::endl;
+  //std::cout << "az < 0: " << (azimuth < 0) << std::endl;
+  //std::cout << "az > 360: " << (azimuth > 360) << std::endl;
+  if(azimuth < 0){
+    azimuth += 360;
+  }else if(azimuth > 360){
+    azimuth -= 360;
+  }
   return azimuth;
 }
