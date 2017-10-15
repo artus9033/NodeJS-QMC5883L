@@ -1,7 +1,7 @@
-var compass = require('./build/Release/binding');
+var compass = require('./index.js');
 
 if (compass.initialize()) {
   setInterval(function () {
-    console.log(compass.readAzimuth());
+    console.log("Azimuth: " + compass.readAzimuth());
   }, 500);
 }
