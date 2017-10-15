@@ -1,4 +1,4 @@
-# *NodeJS-QMC5883*
+# *NodeJS-QMC5883L*
 
 # 1. Table of contents
 - Overview
@@ -6,6 +6,7 @@
 - Hardware Compatibility
 - Libraries Used
 - License
+- TODO
 
 # 2. Overview
 This is a NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board).
@@ -15,7 +16,8 @@ The module is very simple - it provides three methods:
 1. initialize()
 * always returns true (in the future will return false if the compass cannot be initialized)
 * is obligatory to be called before any data is read
-  
+* sets the compass mode to continuous, output data rate to 200Hz, the RNG to 8 Gauss and over-sampling ratio to 256
+
 2. readData()
 * returns a javascript Object of format { x: value, y: value, z: value }
 * if the initialize() function had not been called earlier, the x, y & z value are 0
@@ -32,3 +34,7 @@ The module utilises Jeff Rowberg's I2Cdev (https://github.com/jrowberg/i2cdevlib
 
 # 6. License
 This project is licensed under the GNU General Public License v3. You're allowed to clone the code, modify it and use provided that You mention the author (artus9033) and provide a link to this repository.
+
+# 7. TODO
+1. Add a function to the binding to set the RNG, OSR, ODR & Mode parameters
+2. Make the initialize() function return false if connection didn't succeed
