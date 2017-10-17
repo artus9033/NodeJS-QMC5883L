@@ -1,10 +1,10 @@
 {
-  "name": "da5883",
+  "name": "nodejs-qmc5883l",
   "version": "1.0.0",
-  "description": "A NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board).",
+  "description": "A simple nodejs module used for reading data from the DA5883 on QMC5883L magnetometer",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "configure": "node-gyp configure",
     "build": "node-gyp build"
   },
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "i2c": "^0.2.3",
     "bindings": "^1.2.1"
   }
 }
