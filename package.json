@@ -1,6 +1,6 @@
 {
   "name": "nodejs-qmc5883l",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple nodejs module used for reading data from the DA5883 on QMC5883L magnetometer",
   "main": "index.js",
   "scripts": {
