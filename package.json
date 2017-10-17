@@ -4,7 +4,7 @@
   "description": "A simple nodejs module used for reading data from the DA5883 on QMC5883L magnetometer",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test",
     "configure": "node-gyp configure",
     "build": "node-gyp build"
   },
