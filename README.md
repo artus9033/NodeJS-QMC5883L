@@ -14,22 +14,22 @@ This is a NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L b
 # 3. Usage
 The module is very simple - it provides three methods:
 
-0. _**require**_
+_**0. require**_
 * simply require the module and assign it to a variable:
 ```node
 var compass = require('nodejs-qmc5883l');
 ```
 
-1. _**initialize()**_
+_**1. initialize()**_
 * always returns true (in the future will return false if the compass cannot be initialized)
 * is obligatory to be called before any data is read
 * sets the compass mode to continuous, output data rate to 200Hz, the RNG to 8 Gauss and over-sampling ratio to 256
 
-2. _**readData()**_
+_**2. readData()**_
 * returns a javascript Object of format { x: value, y: value, z: value }
 * if the initialize() function had not been called earlier, the x, y & z value are 0
 
-3. _**readAzimuth()**_
+_**3. readAzimuth()**_
 * returns an azimuth value (calculated using the atan2 function) in degrees
 * it does *not* include any hard iron error minimalization function, etc.
 
