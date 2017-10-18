@@ -9,7 +9,7 @@
 - TODO
 
 # 2. Overview & Installation
-This is a simple NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board). You can install it by running ```npm install --save nodejs-qmc5883l```. Every magnetometer reading is a bit mistaken (caused by soft and hard iron effect), but that can be handled by calibrating the compass. Calibration gives you an offset matrix and a scale matrix that need to be applied on raw magnetometer data before any further computation (in the future I'll implement this so that you will only need to pass the matrixes to the constructor). For now you can do this manually and to find the matrixes, just run ```node calibrate``` in the module's main directory, rotate the magnetometer in all directions until the script finishes running and the matrixes will be printed in the console.
+This is a simple NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board). You can install it by running ```npm install --save nodejs-qmc5883l```. Every magnetometer reading is a bit mistaken (caused e.g. by soft and hard iron effect), but that can be corrected by calibrating the compass. Calibration gives you an offset matrix and a scale matrix that needs to be applied on raw magnetometer data before any further computation. To do this, run ```node calibrate``` in the module's main directory, rotate the magnetometer in all directions until the script finishes running and the matrixes will be printed in the console, and then call ```setOffsetMatrix``` and ```setScaleMatrix``` on the module object. After doing so, you can read the compensated data via the ```readCorrectedData()``` function (if you use the ```readAzimuth``` function, then the azimuth is computed on the already compensated data).
 
 # 3. Usage
 The module is very simple - it provides three methods:
@@ -25,13 +25,24 @@ _**1. initialize()**_
 * is obligatory to be called before any data is read
 * sets the compass mode to continuous, output data rate to 200Hz, the RNG to 8 Gauss and over-sampling ratio to 256
 
-_**2. readData()**_
-* returns a javascript Object of format { x: value, y: value, z: value }
+_**2. readRawData()**_
+* returns a javascript Object of format { x: value, y: value, z: value } with raw magnetometer data (without scale & offset matrixes)
 * if the initialize() function had not been called earlier, the x, y & z value are 0
 
-_**3. readAzimuth()**_
+_**3. readCorrectedData()**_
+* returns a javascript Object of format { x: value, y: value, z: value } with compensated magnetometer data (with scale & offset matrixes applied)
+* if the initialize() function had not been called earlier, the x, y & z value are 0
+
+_**4. setOffsetMatrix(offsetX, offsetY, offsetZ)**_
+* sets the offset matrix used by the readCorrectedData()
+
+_**5. setScaleMatrix(scaleX, scaleY, scaleZ)**_
+* sets the scale matrix used by the readCorrectedData()
+
+_**6. readAzimuth()**_
 * returns an azimuth value (calculated using the atan2 function) in degrees
-* it does *not* include any hard iron error minimalization function, etc.
+* it takes the readCorrectedData() function for data input
+* if the initialize() function had not been called earlier, returns 0
 
 # 4. Example
 A functional example is located in the test.js file in the module's main directory (you can also run it by executing ```npm run test``` in it).
@@ -48,7 +59,6 @@ This project is licensed under the GNU General Public License v3. You're allowed
 # 8. TODO
 1. Add a function to the binding to set the RNG, OSR, ODR & Mode parameters
 2. Make the initialize() function return false if connection didn't succeed
-3. Add offset & scale matrixes functionality
 
 [i2cdev]: https://github.com/jrowberg/i2cdevlib
 [qmclib]: https://github.com/mechasolution/Mecha_QMC5883L

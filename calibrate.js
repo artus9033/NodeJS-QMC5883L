@@ -15,7 +15,9 @@ var max = {
 var count = 0;
 var MAX_NUM = 1000;
 
-console.log('This script will calculate the offset & scale miatrixes for correcting magnetometer output.');
+compass.initialize();
+
+console.log('This script will calculate the offset & scale matrixes for correcting magnetometer output.');
 console.log('Rotate the magnetometer around all 3 axes, until the min and max values don\'t change anymore.');
 console.log('    x        y        z      min x    min y    min z    max x    max y    max z');
 
@@ -24,7 +26,7 @@ setInterval(function () {
         wrapUp();
     }
 
-    var vals = compass.readData();
+    var vals = compass.readRawData();
 
             min.x = Math.min(min.x, vals.x);
             min.y = Math.min(min.y, vals.y);
