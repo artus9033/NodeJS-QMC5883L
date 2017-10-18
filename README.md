@@ -14,8 +14,8 @@ This is a simple NodeJS module that talks to the DA5883 magnetometer (on the QMC
 # 3. Usage
 The module is very simple - it provides three methods:
 
-_**0. require**_
-* simply require the module and assign it to a variable:
+_**Before you start**_
+Simply require the module library and assign it to a variable:
 ```node
 var compass = require('nodejs-qmc5883l');
 ```
@@ -48,6 +48,7 @@ This project is licensed under the GNU General Public License v3. You're allowed
 # 8. TODO
 1. Add a function to the binding to set the RNG, OSR, ODR & Mode parameters
 2. Make the initialize() function return false if connection didn't succeed
+3. Add offset & scale matrixes functionality
 
 [i2cdev]: https://github.com/jrowberg/i2cdevlib
 [qmclib]: https://github.com/mechasolution/Mecha_QMC5883L
