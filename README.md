@@ -1,15 +1,15 @@
 # *NodeJS-QMC5883L*
 
 # 1. Table of contents
-- Overview
+- Overview & Installation
 - Usage
 - Hardware Compatibility
 - Libraries Used
 - License
 - TODO
 
-# 2. Overview
-This is a NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board).
+# 2. Overview & Installation
+This is a simple NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board). You can install it by running ```npm install --save nodejs-qmc5883l```.
 
 # 3. Usage
 The module is very simple - it provides three methods:
