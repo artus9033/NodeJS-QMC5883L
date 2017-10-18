@@ -9,7 +9,7 @@
 - TODO
 
 # 2. Overview & Installation
-This is a simple NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board). You can install it by running ```npm install --save nodejs-qmc5883l```.
+This is a simple NodeJS module that talks to the DA5883 magnetometer (on the QMC5883L board). You can install it by running ```npm install --save nodejs-qmc5883l```. Every magnetometer reading is a bit mistaken (caused by soft and hard iron effect), but that can be handled by calibrating the compass. Calibration gives you an offset matrix and a scale matrix that need to be applied on raw magnetometer data before any further computation (in the future I'll implement this so that you will only need to pass the matrixes to the constructor). For now you can do this manually and to find the matrixes, just run ```node calibrate``` in the module's main directory, rotate the magnetometer in all directions until the script finishes running and the matrixes will be printed in the console.
 
 # 3. Usage
 The module is very simple - it provides three methods:
