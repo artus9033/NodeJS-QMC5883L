@@ -1,10 +1,5 @@
 var compass = require('./build/Release/binding');
 
-if (compass.initialize()) {
-  setInterval(function () {
-    console.log(compass.readAzimuth());
-  }, 10);
-}
 var SAMPLE_RATE = 30;
 
 var min = {
@@ -20,7 +15,8 @@ var max = {
 var count = 0;
 var MAX_NUM = 1000;
 
-console.log('Rotate the magnometer around all 3 axes, until the min and max values don\'t change anymore.');
+console.log('This script will calculate the offset & scale miatrixes for correcting magnetometer output.');
+console.log('Rotate the magnetometer around all 3 axes, until the min and max values don\'t change anymore.');
 console.log('    x        y        z      min x    min y    min z    max x    max y    max z');
 
 setInterval(function () {

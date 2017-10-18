@@ -40,7 +40,7 @@ A functional example is located in the test.js file in the module's main directo
 The module works on the Raspberry PI 3 (tested) on NodeJS 8, but You can clone the repo and change the proper fields (I2C bus device path, I2C device address, I2C device register, etc.) in the binding.cc & other files, so that it is compatible with Your device.
 
 # 6. Libraries Used
-The module utilises Jeff Rowberg's [I2Cdev library][i2cdev] for talking to I2C devices and uses modified parts of code from [MechaQMC5883 library][qmclib], which contains all needed register addresses.
+The module utilises Jeff Rowberg's [I2Cdev library][i2cdev] for talking to I2C devices and uses modified parts of code from [MechaQMC5883 library][qmclib], which contains all needed register addresses. The calibration code is based on the one used in [this HMC5883 library][hmclib].
 
 # 7. License
 This project is licensed under the GNU General Public License v3. You're allowed to clone the code, modify it and use provided that You mention the author (artus9033) and provide a link to this repository.
@@ -51,3 +51,4 @@ This project is licensed under the GNU General Public License v3. You're allowed
 
 [i2cdev]: https://github.com/jrowberg/i2cdevlib
 [qmclib]: https://github.com/mechasolution/Mecha_QMC5883L
+[hmclib]: https://github.com/psiphi75/compass-hmc5883l
