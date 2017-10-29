@@ -10,6 +10,7 @@ float offsetZ = 0;
 float scaleX = 1;
 float scaleY = 1;
 float scaleZ = 1;
+float declinationAngle = 0;
 
 void InitCompass(const FunctionCallbackInfo<Value>& args) {
   da5883.init();
@@ -123,8 +124,9 @@ void ReadAzimuth(const FunctionCallbackInfo<Value>& args){
   float azimuth;
   Isolate* isolate = args.GetIsolate();
   if(ready){
-    da5883.read(&x, &y, &z, &azimuth);
+    da5883.read(&x, &y, &z);
     applyMatrixes(&x, &y, &z);
+    azimuth = da5883.azimuth(&y, &x, declinationAngle);
   }else{
     x = 0;
     y = 0;
@@ -134,10 +136,25 @@ void ReadAzimuth(const FunctionCallbackInfo<Value>& args){
   args.GetReturnValue().Set(Number::New(isolate, azimuth));
 }
 
+void SetCompassDeclinationAngle(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = args.GetIsolate();
+  if (args.Length() != 1) {
+        isolate->ThrowException(Exception::TypeError(
+            String::NewFromUtf8(isolate, "This function expects exactly 1 arguments: the declination angle")));
+        return;
+    }
+  if (!args[0]->IsNumber()) {
+      isolate->ThrowException(Exception::TypeError(
+          String::NewFromUtf8(isolate, "The first argument has to be a number")));
+      return;
+  }
+  declinationAngle = args[0]->NumberValue();
+}
 void Initialize(Local<Object> exports) {
   NODE_SET_METHOD(exports, "initialize", InitCompass);
   NODE_SET_METHOD(exports, "setOffsetMatrix", SetCompassOffset);
   NODE_SET_METHOD(exports, "setScaleMatrix", SetCompassScale);
+  NODE_SET_METHOD(exports, "setDeclinationAngle", SetCompassDeclinationAngle);
   NODE_SET_METHOD(exports, "readRawData", ReadRawCompassData);
   NODE_SET_METHOD(exports, "readCorrectedData", ReadCorrectedCompassData);
   NODE_SET_METHOD(exports, "readAzimuth", ReadAzimuth);

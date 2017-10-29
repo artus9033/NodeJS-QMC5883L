@@ -44,6 +44,12 @@ _**6. readAzimuth()**_
 * it takes the readCorrectedData() function for data input
 * if the initialize() function had not been called earlier, returns 0
 
+_**7. setDeclinationAngle(declinationAngle)**_
+* takes a single declinationAngle parameter of any number type
+* sets the declination angle that is added to the azimuth when calling readAzimuth() to correct the magnetic field differences
+* you can calculate the angle using the following formula: declinationAngle = (degrees + (minutes / 60.0)) / (180 / PI)
+_(see test.js)_
+
 # 4. Example
 A functional example is located in the test.js file in the module's main directory (you can also run it by executing ```npm run test``` in it).
 

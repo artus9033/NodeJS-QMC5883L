@@ -49,20 +49,21 @@ void MechaQMC5883::read(int16_t* x, int16_t* y, int16_t* z){
 
 void MechaQMC5883::read(int16_t* x,int16_t* y,int16_t* z,int* a){
   read(x,y,z);
-  *a = azimuth(y,x);
+  *a = azimuth(y,x,0);
 }
 
 void MechaQMC5883::read(int16_t* x,int16_t* y,int16_t* z,float* a){
   read(x,y,z);
-  *a = azimuth(y,x);
+  *a = azimuth(y,x,0);
 }
 
 
-float MechaQMC5883::azimuth(int16_t *a, int16_t *b){
+float MechaQMC5883::azimuth(int16_t *a, int16_t *b, float declinationAngle){
   float azimuth = atan2(*a, *b) * 180.0/PI;
   //std::cout << "az: " << azimuth << std::endl;
   //std::cout << "az < 0: " << (azimuth < 0) << std::endl;
   //std::cout << "az > 360: " << (azimuth > 360) << std::endl;
+  azimuth += declinationAngle;
   if(azimuth < 0){
     azimuth += 360;
   }else if(azimuth > 360){

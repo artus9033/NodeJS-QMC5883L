@@ -55,7 +55,7 @@ void read(int16_t* x,int16_t* y,int16_t* z); //reading
 void read(int16_t* x,int16_t* y,int16_t* z,int* a);
 void read(int16_t* x, int16_t* y,int16_t* z,float* a);
 
-float azimuth(int16_t* a,int16_t* b);
+float azimuth(int16_t* a,int16_t* b,float declinationAngle);
 
 private:
 
