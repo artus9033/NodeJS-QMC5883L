@@ -126,7 +126,7 @@ void ReadAzimuth(const FunctionCallbackInfo<Value>& args){
   if(ready){
     da5883.read(&x, &y, &z);
     applyMatrixes(&x, &y, &z);
-    azimuth = da5883.azimuth(&y, &x, declinationAngle);
+    azimuth = da5883.azimuth(&y, &x, (float) declinationAngle);
   }else{
     x = 0;
     y = 0;
