@@ -1,6 +1,6 @@
 {
   "name": "nodejs-qmc5883l",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "A NodeJS driver for the QMC5883L magnetometer",
   "main": "index.js",
   "scripts": {
