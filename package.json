@@ -1,13 +1,15 @@
 {
   "name": "nodejs-qmc5883l",
-  "version": "1.2.0",
-  "description": "A simple nodejs module used for reading data from the DA5883 on QMC5883L magnetometer",
+  "version": "1.2.1",
+  "description": "A NodeJS driver for the QMC5883L magnetometer",
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
     "calibrate": "node calibrate.js",
     "configure": "node-gyp configure",
-    "build": "node-gyp build"
+    "build": "node-gyp build",
+    "rebuild": "node-gyp rebuild",
+    "postinstall": "npm run rebuild"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
     "node",
     "nodejs",
     "da5883",
+    "QMC5883L",
     "magnetometer",
     "rpi",
     "raspberry"
@@ -28,10 +31,11 @@
   },
   "homepage": "https://github.com/artus9033/nodejs-qmc5883l#readme",
   "devDependencies": {
-    "node-gyp": "^1.0.3"
+    "node-addon-api": "^3.1.0",
+    "node-gyp": "^8.0.0"
   },
   "dependencies": {
-    "bluebird": "^3.5.1",
-    "bindings": "^1.2.1"
+    "bindings": "^1.5.0",
+    "bluebird": "^3.7.2"
   }
 }
